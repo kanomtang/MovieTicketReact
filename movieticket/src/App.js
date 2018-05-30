@@ -41,7 +41,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Titles/>
-        <Form />
+        <Form values = {this.state.MovieList}/>
       </div>
     );
   }
