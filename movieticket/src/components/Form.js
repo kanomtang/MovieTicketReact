@@ -4,7 +4,7 @@ class Form extends React.Component {
 
 render(){
     return (
-        <form  onClick = {this.props.GetMovieData}>
+        <form >
             
             <button>Submit</button>
         </form>
