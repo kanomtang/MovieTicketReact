@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import './App.css';
 import Titles from "./components/Titles";
-import Form from "./components/Form";
+import FormComponent from "./components/Form";
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       mId: undefined,
       mName: undefined,
       mPrice: undefined,
-      mNow_showing:undefined,
+      mNow_showing: undefined,
       mImage: undefined,
       MovieList: [],
     }
   }
-  componentDidMount(){
-    fetch(`http://www.mocky.io/v2/5af178123000003700ba7ff2`).then((Respone)=> Respone.json()).then((findRespone)=>{
+  componentDidMount() {
+    fetch(`http://www.mocky.io/v2/5af178123000003700ba7ff2`).then((Respone) => Respone.json()).then((findRespone) => {
       this.setState({
         MovieList: findRespone['data'],
       })
-    console.log(this.state.MovieList)
+      console.log(this.state.MovieList)
     })
-   
+
 
   }
 
@@ -40,8 +40,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Titles/>
-        <Form values = {this.state.MovieList}/>
+        <Titles />
+        <FormComponent values={this.state.MovieList} />
       </div>
     );
   }
