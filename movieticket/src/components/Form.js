@@ -15,9 +15,21 @@ class FormComponent extends React.Component {
                 Image: undefined,
                 Now_showing: undefined,
             }],
+            ChangeDetail: [{
+                changeMoney: 0,
+                oneThousand:0,
+                fiveHundred:0,
+                oneHundred:0,
+                fifty:0,
+                twenty:0,
+                ten:0,
+                five:0,
+                two:0,
+                one:0
+            }],
             inputAmount: 0,
             inputMoney: 0,
-            changeMoney: 0,
+
             modal: false,
         };
 
