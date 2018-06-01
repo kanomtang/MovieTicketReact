@@ -1,5 +1,8 @@
 import React from "react";
-import { Col,Form, FormGroup, Label, InputGroup, InputGroupAddon, InputGroupText, Input, Button } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody,
+     ModalFooter,Col,Form, FormGroup, Label,
+      InputGroup, InputGroupAddon, InputGroupText,
+       Input, Button } from 'reactstrap';
 class FormComponent extends React.Component {
     constructor(props) {
         super(props)
@@ -7,12 +10,18 @@ class FormComponent extends React.Component {
             price: undefined,
             movieDataID: undefined,
             movieDataName: undefined,
-            movieDataPrice: undefined,
+            movieDataPrice: 0,
             movieDataImage: undefined,
             movieDataNowShowing: undefined,
+            inputAmount: 0,
+            inputMoney: 0,
+            modal: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.changeInputAmount = this.changeInputAmount.bind(this);
+        this.changeMoneyValue = this.changeMoneyValue.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
     handleChange = (e) => {
 
@@ -28,6 +37,28 @@ class FormComponent extends React.Component {
 
         })
         e.preventDefault();
+    }
+    changeInputAmount(e){
+        this.setState({
+            inputAmount: e.target.value,
+        });
+        e.preventDefault();
+    }
+    changeMoneyValue(e){
+        this.setState({
+            inputMoney: e.target.value,
+        });
+        e.preventDefault();
+    }
+    toggle() {
+        this.setState({
+          modal: !this.state.modal
+        });
+      }
+    submitHandle(){
+        this.setState({
+            modal: !this.state.modal
+          });
     }
 
 
@@ -56,20 +87,45 @@ class FormComponent extends React.Component {
 
                     <FormGroup>
                         <InputGroup>
-                            <InputGroupAddon addonType="prepend">Amount</InputGroupAddon>
-                            <Input placeholder="ie. 1" type="number" />
-                            <InputGroupAddon addonType="append">ea.</InputGroupAddon>
+                             <InputGroupAddon addonType="prepend" >Amount</InputGroupAddon>
+                            <Input placeholder="ie. 1" type="number" value={this.state.inputAmount} onChange={this.changeInputAmount} />
+                            <InputGroupAddon addonType="append">pcs.</InputGroupAddon>                            
                         </InputGroup>
                     </FormGroup>
+
+                    <FormGroup>
+                        <InputGroup>
+                        <InputGroupAddon addonType="prepend">Total</InputGroupAddon>
+                        <Col sm={10}>{
+                           this.state.inputAmount>0 && this.state.movieDataPrice> 0 && <h3><Label >
+                           {this.state.inputAmount * this.state.movieDataPrice}</Label>{' '}</h3> }
+                        
+                        </Col>
+                        </InputGroup>
+                    </FormGroup>
+
                     <FormGroup>
                         <InputGroup>
                             <InputGroupAddon addonType="prepend">Money</InputGroupAddon>
-                            <Input placeholder="ie. 350" type="number" />
+                            <Input placeholder="ie. 350" type="number"  value={this.state.inputMoney} onChange={this.changeMoneyValue} />
                             <InputGroupAddon addonType="append">Bath</InputGroupAddon>
                         </InputGroup>
                     </FormGroup>
-                    <Button color="success">Submit!</Button>
+
+                   <Button color="danger" onClick={this.submitHandle}>Submit</Button>
                 </Form>
+
+        
+        {/* <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>Confirm Ticket</ModalHeader>
+          <ModalBody>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggle}>Confirm</Button>{' '}
+            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          </ModalFooter>
+        </Modal> */}
             </div>
 
             //     <input type = "number" value = {this.state.movieData.price} 
