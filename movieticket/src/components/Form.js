@@ -8,13 +8,16 @@ class FormComponent extends React.Component {
         super(props)
         this.state = {
             price: undefined,
-            movieDataID: undefined,
-            movieDataName: undefined,
-            movieDataPrice: 0,
-            movieDataImage: undefined,
-            movieDataNowShowing: undefined,
+            MovieData: [{
+                ID: undefined,
+                Name: undefined,
+                Price: 0,
+                Image: undefined,
+                Now_showing: undefined,
+            }],
             inputAmount: 0,
             inputMoney: 0,
+            changeMoney: 0,
             modal: false,
         };
 
@@ -22,19 +25,22 @@ class FormComponent extends React.Component {
         this.changeInputAmount = this.changeInputAmount.bind(this);
         this.changeMoneyValue = this.changeMoneyValue.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.submitHandle = this.submitHandle.bind(this);
     }
     handleChange = (e) => {
 
         var valueData = this.props.values.filter(function (item) {
             return item.name === e.target.value
         })
+        let newState = Object.assign({}, this.state.MovieData,{
+            ID:valueData[0].id,
+            Name:valueData[0].name,
+            Price:valueData[0].price,
+            Image:valueData[0].image,
+            Now_showing:valueData[0].now_showing,
+        });
         this.setState({
-            movieDataID: valueData[0].id,
-            movieDataName: valueData[0].name,
-            movieDataPrice: valueData[0].price,
-            movieDataImage: valueData[0].image,
-            movieDataNowShowing: valueData[0].now_showing,
-
+           MovieData: newState,
         })
         e.preventDefault();
     }
@@ -56,6 +62,8 @@ class FormComponent extends React.Component {
         });
       }
     submitHandle(){
+        /* calculate the change money*/
+        
         this.setState({
             modal: !this.state.modal
           });
@@ -80,12 +88,12 @@ class FormComponent extends React.Component {
                         <InputGroup>
                         <InputGroupAddon addonType="prepend">Price</InputGroupAddon>
                         <Col sm={10}>
-                        <h3><Label >{this.state.movieDataPrice}</Label>{' '}</h3>
+                        <h3><Label >{this.state.MovieData.Price}</Label>{' '}</h3>
                         </Col>
                         </InputGroup>
                     </FormGroup>
 
-                    <FormGroup>
+                     <FormGroup>
                         <InputGroup>
                              <InputGroupAddon addonType="prepend" >Amount</InputGroupAddon>
                             <Input placeholder="ie. 1" type="number" value={this.state.inputAmount} onChange={this.changeInputAmount} />
@@ -97,8 +105,8 @@ class FormComponent extends React.Component {
                         <InputGroup>
                         <InputGroupAddon addonType="prepend">Total</InputGroupAddon>
                         <Col sm={10}>{
-                           this.state.inputAmount>0 && this.state.movieDataPrice> 0 && <h3><Label >
-                           {this.state.inputAmount * this.state.movieDataPrice}</Label>{' '}</h3> }
+                           this.state.inputAmount>0 && this.state.MovieData.Price> 0 && <h3><Label >
+                           {this.state.inputAmount * this.state.MovieData.Price}</Label>{' '}</h3> }
                         
                         </Col>
                         </InputGroup>
@@ -112,14 +120,17 @@ class FormComponent extends React.Component {
                         </InputGroup>
                     </FormGroup>
 
-                   <Button color="danger" onClick={this.submitHandle}>Submit</Button>
+                   <Button color="danger" onClick={this.submitHandle}>Submit</Button> 
                 </Form>
 
         
         {/* <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Confirm Ticket</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <h1>{this.state.movieDataName} x {this.state.inputAmount}</h1>
+            <h2>Price: {this.state.movieDataPrice}</h2>
+            <h2>Deposit Money: {this.state.inputMoney}</h2>
+            <h2>Change: {this.state.changeMoney}</h2>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Confirm</Button>{' '}
@@ -128,9 +139,7 @@ class FormComponent extends React.Component {
         </Modal> */}
             </div>
 
-            //     <input type = "number" value = {this.state.movieData.price} 
-            //     onChange = {this.updateState} />
-            //  <h3>{this.state.data}</h3>
+
         )
     }
 }
