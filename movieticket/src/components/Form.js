@@ -16,16 +16,16 @@ class FormComponent extends React.Component {
                 Now_showing: undefined,
             }],
             ChangeDetail: [{
-                changeMoney: 0,
-                oneThousand:0,
-                fiveHundred:0,
-                oneHundred:0,
-                fifty:0,
-                twenty:0,
-                ten:0,
-                five:0,
-                two:0,
-                one:0
+                ChangeMoney: 0,
+                OneThousand:0,
+                FiveHundred:0,
+                OneHundred:0,
+                Fifty:0,
+                Twenty:0,
+                Ten:0,
+                Five:0,
+                Two:0,
+                One:0,
             }],
             inputAmount: 0,
             inputMoney: 0,
@@ -75,8 +75,61 @@ class FormComponent extends React.Component {
       }
     submitHandle(){
         /* calculate the change money*/
-        
+        let mchangeMoney = (this.state.inputMoney)-(this.state.MovieData.Price*this.state.inputAmount);
+        let moneThousand , mfiveHundred , moneHundred , mfifty , mtwenty , mten ,mfive , mtwo , mone;
+        moneThousand = mfiveHundred = moneHundred = mfifty = mtwenty = mten = mfive = mtwo = mone = 0;
+        while(mchangeMoney>0){
+            if(mchangeMoney>= 1000){
+                mchangeMoney -= 1000;
+                moneThousand += 1;
+            }
+            else if (mchangeMoney>= 500 && mchangeMoney < 1000){
+                mchangeMoney -= 500;
+                mfiveHundred +=1;
+            }
+            else if (mchangeMoney>= 100 && mchangeMoney < 500){
+                mchangeMoney -= 100;
+                moneHundred +=1 ;
+            }
+            else if (mchangeMoney>= 50 && mchangeMoney < 100){
+                mchangeMoney -= 50;
+                mfifty+=1;
+            }
+            else if (mchangeMoney>= 20 && mchangeMoney < 50){
+                mchangeMoney -= 20;
+                mtwenty+=1;
+            }
+            else if (mchangeMoney>= 10 && mchangeMoney < 20){
+                mchangeMoney -= 10;
+                mten+=1;
+            }
+            else if (mchangeMoney>= 5 && mchangeMoney < 10){
+                mchangeMoney -= 5;
+                mfive+=1;
+            }
+            else if (mchangeMoney>= 2 && mchangeMoney < 5){
+                mchangeMoney -= 2;
+                mtwo+=1;
+            }
+            else if (mchangeMoney>= 1 && mchangeMoney < 2){
+                mchangeMoney -= 1;
+                mone+=1;
+            }
+        }
+        let newState = Object.assign({}, this.state.ChangeDetail,{
+            ChangeMoney: mchangeMoney,
+            OneThousand:moneThousand,
+            FiveHundred:mfiveHundred,
+            OneHundred:moneHundred,
+            Fifty:mfifty,
+            Twenty:mtwenty,
+            Ten:mten,
+            Five:mfive,
+            Two:mtwo,
+            One:mone
+        });
         this.setState({
+            ChangeDetail: newState,
             modal: !this.state.modal
           });
     }
@@ -118,7 +171,7 @@ class FormComponent extends React.Component {
                         <InputGroupAddon addonType="prepend">Total</InputGroupAddon>
                         <Col sm={10}>{
                            this.state.inputAmount>0 && this.state.MovieData.Price> 0 && <h3><Label >
-                           {this.state.inputAmount * this.state.MovieData.Price}</Label>{' '}</h3> }
+                            {this.state.inputAmount * this.state.MovieData.Price}</Label>{' '}</h3> }
                         
                         </Col>
                         </InputGroup>
@@ -136,19 +189,20 @@ class FormComponent extends React.Component {
                 </Form>
 
         
-        {/* <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Confirm Ticket</ModalHeader>
           <ModalBody>
             <h1>{this.state.movieDataName} x {this.state.inputAmount}</h1>
             <h2>Price: {this.state.movieDataPrice}</h2>
             <h2>Deposit Money: {this.state.inputMoney}</h2>
             <h2>Change: {this.state.changeMoney}</h2>
+            <h5>{this.state.ChangeDetail.OneHundred}</h5>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Confirm</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
-        </Modal> */}
+        </Modal>
             </div>
 
 
