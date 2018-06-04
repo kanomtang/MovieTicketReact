@@ -1,8 +1,8 @@
 import React from "react";
 import {Row, Modal, ModalHeader, ModalBody,
-     ModalFooter,Col,Form, FormGroup, Label,
-      InputGroup, InputGroupAddon, InputGroupText,
-       Input, Button } from 'reactstrap';
+        ModalFooter,Col,Form, FormGroup, Label,
+        InputGroup, InputGroupAddon,
+        Input, Button } from 'reactstrap';
 import logo from '../logo.svg';
 class FormComponent extends React.Component {
     constructor(props) {
@@ -200,8 +200,8 @@ class FormComponent extends React.Component {
                 </Col>
                 <Col md = {6}>
                     {this.state.MovieData.Image ? (
-                    <img src={this.state.MovieData.Image} />
-                    ) : <img src={logo} />}
+                    <img src={this.state.MovieData.Image} alt={this.MovieData.Name} />
+                    ) : <img src={logo} alt="waiting for select movie" />}
                 </Col>
                 </Row>
 

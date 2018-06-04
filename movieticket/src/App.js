@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Titles from "./components/Titles";
 import FormComponent from "./components/Form";
