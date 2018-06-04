@@ -200,7 +200,7 @@ class FormComponent extends React.Component {
                 </Col>
                 <Col md = {6}>
                     {this.state.MovieData.Image ? (
-                    <img src={this.state.MovieData.Image} alt={this.MovieData.Name} />
+                    <img src={this.state.MovieData.Image} alt="Movie now showing" />
                     ) : <img src={logo} alt="waiting for select movie" />}
                 </Col>
                 </Row>
@@ -208,11 +208,25 @@ class FormComponent extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Confirm Ticket</ModalHeader>
           <ModalBody>
-            <h1>{this.state.MovieData.Name} x {this.state.inputAmount}</h1>
-            <h2>Price: {this.state.MovieData.Price}</h2>
-            <h2>Deposit Money: {this.state.inputMoney}</h2>
-            <h2>Change: {this.state.ChangeDetail.ChangeMoney}</h2>
-            <h5>{this.state.ChangeDetail.OneHundred}</h5>
+            <h4>{this.state.MovieData.Name} x {this.state.inputAmount}</h4>
+            <h4>Price: {this.state.MovieData.Price} Bath</h4>
+            <h5>Deposit Money: {this.state.inputMoney}  Bath</h5>
+            <h5>Change: {this.state.ChangeDetail.ChangeMoney} Bath</h5>
+            <Row>
+                <Col md = {3}>1000 x {this.state.ChangeDetail.OneThousand}</Col>
+                <Col md = {3}>500 x {this.state.ChangeDetail.FiveHundred}</Col>
+                <Col md = {3}>100 x {this.state.ChangeDetail.OneHundred}</Col>
+            </Row>
+            <Row>
+                <Col md = {3}>50 x {this.state.ChangeDetail.Fifty}</Col>
+                <Col md = {3}>20 x {this.state.ChangeDetail.Twenty}</Col>
+                <Col md = {3}>10 x {this.state.ChangeDetail.Ten}</Col>
+            </Row>
+            <Row>
+                <Col md = {3}>5 x {this.state.ChangeDetail.Five}</Col>
+                <Col md = {3}>2 x {this.state.ChangeDetail.Two}</Col>
+                <Col md = {3}>1 x {this.state.ChangeDetail.One}</Col>
+            </Row>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Confirm</Button>{' '}
