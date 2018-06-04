@@ -41,7 +41,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <Titles />
-        <FormComponent values={this.state.MovieList} />
+        <FormComponent values={this.state.MovieList.filter(function(item){
+          return item.now_showing === true ;
+        })} />
       </div>
     );
   }

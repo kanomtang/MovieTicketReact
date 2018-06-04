@@ -1,8 +1,9 @@
 import React from "react";
-import { Modal, ModalHeader, ModalBody,
+import {Row, Modal, ModalHeader, ModalBody,
      ModalFooter,Col,Form, FormGroup, Label,
       InputGroup, InputGroupAddon, InputGroupText,
        Input, Button } from 'reactstrap';
+import logo from '../logo.svg';
 class FormComponent extends React.Component {
     constructor(props) {
         super(props)
@@ -29,6 +30,7 @@ class FormComponent extends React.Component {
             }],
             inputAmount: 0,
             inputMoney: 0,
+            ButtonState: false,
 
             modal: false,
         };
@@ -63,8 +65,13 @@ class FormComponent extends React.Component {
         e.preventDefault();
     }
     changeMoneyValue(e){
+        let checkMoney = false;
+        if(e.target.value  - (this.state.inputAmount*this.state.MovieData.Price)>0){
+            checkMoney = true;
+        }
         this.setState({
             inputMoney: e.target.value,
+            ButtonState: checkMoney,
         });
         e.preventDefault();
     }
@@ -76,6 +83,7 @@ class FormComponent extends React.Component {
     submitHandle(){
         /* calculate the change money*/
         let mchangeMoney = (this.state.inputMoney)-(this.state.MovieData.Price*this.state.inputAmount);
+        let moneyChangeValue = mchangeMoney;
         let moneThousand , mfiveHundred , moneHundred , mfifty , mtwenty , mten ,mfive , mtwo , mone;
         moneThousand = mfiveHundred = moneHundred = mfifty = mtwenty = mten = mfive = mtwo = mone = 0;
         while(mchangeMoney>0){
@@ -117,7 +125,7 @@ class FormComponent extends React.Component {
             }
         }
         let newState = Object.assign({}, this.state.ChangeDetail,{
-            ChangeMoney: mchangeMoney,
+            ChangeMoney: moneyChangeValue,
             OneThousand:moneThousand,
             FiveHundred:mfiveHundred,
             OneHundred:moneHundred,
@@ -138,7 +146,9 @@ class FormComponent extends React.Component {
     render() {
         return (
             <div>
-                <Form style={{width: '50%'}}>
+                <Row>
+                <Col md={6}>
+                <Form >
                     <FormGroup>
                         <InputGroup>
                             <select onChange={this.handleChange}>
@@ -185,17 +195,23 @@ class FormComponent extends React.Component {
                         </InputGroup>
                     </FormGroup>
 
-                   <Button color="danger" onClick={this.submitHandle}>Submit</Button> 
+                   <Button outline color="danger"   disabled={!this.state.ButtonState} onClick={this.submitHandle}>Submit</Button> 
                 </Form>
+                </Col>
+                <Col md = {6}>
+                    {this.state.MovieData.Image ? (
+                    <img src={this.state.MovieData.Image} />
+                    ) : <img src={logo} />}
+                </Col>
+                </Row>
 
-        
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Confirm Ticket</ModalHeader>
           <ModalBody>
-            <h1>{this.state.movieDataName} x {this.state.inputAmount}</h1>
-            <h2>Price: {this.state.movieDataPrice}</h2>
+            <h1>{this.state.MovieData.Name} x {this.state.inputAmount}</h1>
+            <h2>Price: {this.state.MovieData.Price}</h2>
             <h2>Deposit Money: {this.state.inputMoney}</h2>
-            <h2>Change: {this.state.changeMoney}</h2>
+            <h2>Change: {this.state.ChangeDetail.ChangeMoney}</h2>
             <h5>{this.state.ChangeDetail.OneHundred}</h5>
           </ModalBody>
           <ModalFooter>
