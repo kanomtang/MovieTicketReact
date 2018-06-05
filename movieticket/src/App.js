@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Titles from "./components/Titles";
 import FormComponent from "./components/Form";
-
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -26,20 +25,10 @@ class App extends React.Component {
 
   }
 
-  // getMovieData = async (e) => {
-  //   e.preventDefault();
-  //   const api_call = await fetch(`http://www.mocky.io/v2/5af178123000003700ba7ff2`);
-  //   const data = await api_call.json();
-  //   console.log(data);
-  //   if(data){
-  //     this.setState({
-  //      MovieList: data,
-  //     });
-  //   }
-  // }
   render() {
     return (
-      <div className="App">
+      <div className="App"> 
+     
         <Titles />
         <FormComponent values={this.state.MovieList.filter(function(item){
           return item.now_showing === true ;

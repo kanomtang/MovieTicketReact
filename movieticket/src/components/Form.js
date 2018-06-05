@@ -4,6 +4,7 @@ import {Row, Modal, ModalHeader, ModalBody,
         InputGroup, InputGroupAddon,
         Input, Button } from 'reactstrap';
 import logo from '../logo.svg';
+import swal from 'sweetalert';
 class FormComponent extends React.Component {
     constructor(props) {
         super(props)
@@ -40,6 +41,7 @@ class FormComponent extends React.Component {
         this.changeMoneyValue = this.changeMoneyValue.bind(this);
         this.toggle = this.toggle.bind(this);
         this.submitHandle = this.submitHandle.bind(this);
+        this.confirmHandle = this.confirmHandle.bind(this);
     }
     handleChange = (e) => {
 
@@ -80,6 +82,26 @@ class FormComponent extends React.Component {
           modal: !this.state.modal
         });
       }
+    confirmHandle(){
+        let clearData = Object.assign({},this.state.MovieData,{
+            ID: undefined,
+            Name: undefined,
+            Price: 0,
+            Image: undefined,
+            Now_showing: undefined,
+        });
+  
+        this.setState({
+            modal: !this.state.modal,
+            MovieData: clearData,
+            inputAmount: 0,
+            inputMoney: 0,
+            ButtonState: !this.state.ButtonState,
+
+        })
+     
+        swal("Successful to booking!", "Have a nice day!", "success");
+    }
     submitHandle(){
         /* calculate the change money*/
         let mchangeMoney = (this.state.inputMoney)-(this.state.MovieData.Price*this.state.inputAmount);
@@ -145,7 +167,7 @@ class FormComponent extends React.Component {
 
     render() {
         return (
-            <div>
+            <div >
                 <Row>
                 <Col md={6}>
                 <Form >
@@ -209,9 +231,9 @@ class FormComponent extends React.Component {
           <ModalHeader toggle={this.toggle}>Confirm Ticket</ModalHeader>
           <ModalBody>
             <h4>{this.state.MovieData.Name} x {this.state.inputAmount}</h4>
-            <h4>Price: {this.state.MovieData.Price} Bath</h4>
-            <h5>Deposit Money: {this.state.inputMoney}  Bath</h5>
-            <h5>Change: {this.state.ChangeDetail.ChangeMoney} Bath</h5>
+            <h4>Price: {this.state.MovieData.Price} ฿</h4>
+            <h5>Deposit Money: {this.state.inputMoney}  ฿</h5>
+            <h5>Change: {this.state.ChangeDetail.ChangeMoney} ฿</h5>
             <Row>
                 <Col md = {3}>1000 x {this.state.ChangeDetail.OneThousand}</Col>
                 <Col md = {3}>500 x {this.state.ChangeDetail.FiveHundred}</Col>
@@ -229,7 +251,7 @@ class FormComponent extends React.Component {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Confirm</Button>{' '}
+            <Button color="primary" onClick={this.confirmHandle}>Confirm</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
