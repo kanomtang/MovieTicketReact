@@ -6,3 +6,6 @@
   
   - Demo Image
   
+<p align="center">
+  <img alt="A success modal" src="https://github.com/kanomtang/MovieTicketReact/blob/master/exercise/assets/confirm.png">
+</p>
