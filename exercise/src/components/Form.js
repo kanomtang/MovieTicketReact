@@ -170,7 +170,7 @@ class FormComponent extends React.Component {
             <div >
                 <Row>
                 <Col md={6}>
-                <Form >
+                <Form>
                     <FormGroup>
                         <InputGroup>
                             <select onChange={this.handleChange}>
@@ -217,7 +217,7 @@ class FormComponent extends React.Component {
                         </InputGroup>
                     </FormGroup>
 
-                   <Button outline color="danger"   disabled={!this.state.ButtonState} onClick={this.submitHandle}>Submit</Button> 
+                   <Button outline color="success"   disabled={!this.state.ButtonState} onClick={this.submitHandle}>Submit</Button> 
                 </Form>
                 </Col>
                 <Col md = {6}>
