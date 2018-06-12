@@ -6,7 +6,8 @@
     - npm install --save reactstrap react react-dom
     - npm install --save sweetalert
     
-  
+  - Demo Live
+  https://kanomtang.github.io/MovieTicketReact/
   - Demo Image
   
   
