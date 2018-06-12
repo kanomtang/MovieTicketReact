@@ -2,7 +2,7 @@
   "name": "movieticket",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://kanomtang.github.io/MovieTicketReact",
+  "homepage": "http://kanomtang.github.io/MovieTicketReact/",
   "dependencies": {
     "bootstrap": "^4.1.1",
     "react": "^16.4.0",
