@@ -2,6 +2,7 @@
   "name": "movieticket",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://kanomtang.github.io/MovieTicketReact",
   "dependencies": {
     "bootstrap": "^4.1.1",
     "react": "^16.4.0",
@@ -14,12 +15,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "gh-pages": "^1.2.0",
     "jest": "^23.1.0",
     "jest-enzyme": "^6.0.1"
   }
