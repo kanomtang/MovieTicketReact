@@ -15,7 +15,7 @@ class App extends React.Component {
     }
   }
   componentDidMount() {
-    fetch(`http://www.mocky.io/v2/5af178123000003700ba7ff2`).then((Respone) => Respone.json()).then((findRespone) => {
+    fetch(`https://www.mocky.io/v2/5af178123000003700ba7ff2`).then((Respone) => Respone.json()).then((findRespone) => {
       this.setState({
         MovieList: findRespone['data'],
       })
