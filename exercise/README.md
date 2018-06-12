@@ -1,8 +1,11 @@
 # Table of Contents
   - Installation
     - clone from this repositiory
-    - npm install --save sweetalert
+    - npm install
+    - npm install bootstrap --save
     - npm install --save reactstrap react react-dom
+    - npm install --save sweetalert
+    
   
   - Demo Image
   
